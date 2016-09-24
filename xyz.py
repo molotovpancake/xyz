@@ -18,25 +18,31 @@ def main():
   print (rn)
   sleep(0.4)
 
-  msg = ["Take a guess. ", "Guess again. ", "Take another guess. ", "Nope. "]
+  msg = ["Take a guess. ", "Guess again. ", "Take another guess. "]
 
   end = False
   i = 0
+  guesses = 0
   while end == False:
-    sleep(0.1)
-    ui = input (msg [i])
-    i = randint(1, len(msg)-1)
-    try:
-      ui = int(ui)
-      if rn == ui:
-        print ("Correct! Goodbye.")
-        sleep(0.1)
-        break
-      else:
-        if ui < rn:
-          print ("Less.")
+    if guesses < 3:
+      sleep(0.1)
+      ui = input (msg [i])
+      i = randint(1, len(msg)-1)
+      try:
+        ui = int(ui)
+        if rn == ui:
+          print ("Correct! Goodbye.")
+          sleep(0.1)
+          break
         else:
-          pass
-    except:
-      print ("That's not a number.")
+          if ui < rn:
+            print ("More.")
+          else:
+            print ("Less.")
+        guesses = (guesses + 1)
+      except:
+        print ("That's not a valid number.")
+    else:
+      print ("You are out of guesses. goodbye.")
+      exit()
 main()
